@@ -3,6 +3,7 @@ MD = md
 RD = rd
 RDFLAGS = /Q /S
 CP = copy
+XCOPY = xcopy
 ZIP = 7z
 ZFLAGS = a
 
@@ -17,7 +18,7 @@ OUTDIR = $(MAKEDIR)\dist
 OUTDIR32 = $(OUTDIR)\x86
 OUTDIR64 = $(OUTDIR)\x64
 
-all: tolkdll tolkdotnetdll tolkjar tolkdocs
+all: tolkdll copydll tolkdotnetdll tolkjar tolkdocs
 
 dist:
 	$(MD) $(OUTDIR)
@@ -36,6 +37,9 @@ dist:
 
 tolkdll:
 	$(CD) $(SRCDIR) && $(MAKE) /$(MAKEFLAGS)
+
+copydll:
+	$(XCOPY) /Y "$(SRCDIR)\Tolk.dll" "$(DOTNETDIR)\TolkDotNet\lib\Tolk.dll*"
 	
 tolkdotnetdll:
 	$(CD) $(DOTNETDIR) && $(MAKE) /$(MAKEFLAGS)

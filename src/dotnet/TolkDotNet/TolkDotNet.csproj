@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <Title>TolkDotNet</Title>
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Description>.NET wrapper for Tolk C++ dll</Description>
+    <PackageTags>nuget-component, dotnet-package, tolk, accessibility, screen-reader</PackageTags>
+    <SignAssembly>false</SignAssembly>
+    <!--Symbols for debug the .dll of this package-->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageIconUrl />
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+   <ItemGroup>
+    <Content Include="lib/*.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFrameworks.Split(";")[0])</PackagePath>
+    </Content>
+    <!--TODO: Change this code below to a for loop over $(TargetFrameworks) -->
+    <Content Include="lib/*.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFrameworks.Split(";")[1])</PackagePath>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="runtimes\**" PackagePath="runtimes" Visible="true" />
+  </ItemGroup>
+</Project>
